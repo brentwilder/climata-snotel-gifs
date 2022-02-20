@@ -12,8 +12,8 @@ from climata.snotel import StationDailyDataIO
 
 def job():
     # Authenticate to twitter
-    auth = tw.OAuthHandler('apikey','apisecret')
-    auth.set_access_token('tokenkey', 'tokensecret')
+    auth = tw.OAuthHandler('h9E4X7ol8CRJgmtfcHfv2uaop','H1pfhLiYHWGsEiLyZH1rM7J42FKv9FrNCj8WkMF7ItmUfXSShX')
+    auth.set_access_token('1338378145007734785-CGxTPHVlqPXMHUpWK2VmTC9bgvp1AJ', 'HQWqv99qCI8oWEcyR9EinnsycVnPkp3A2pYrJsWg2ib5n')
 
     # Create API Object
     api = tw.API(auth)
@@ -58,9 +58,9 @@ def job():
     print('[INFO] Tweet written')
 
     # Check to make sure there was precip
-    if prec_diff >= 1.0:
+    if prec_diff >= 0.5:
         # Make sure this precip was snow
-        if snow_diff >= 1.0:
+        if snow_diff >= 0.1:
             # Create a tweet
             api.update_status(status=tweet, media_ids=[media.media_id])
             print('[INFO] Tweet posted!')
