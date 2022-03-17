@@ -39,11 +39,11 @@ def job():
     # Looking through the nested loop and saving data (SD)
     temp = []
     for param in banner:
-        if param.element_name == 'SNOW DEPTH':
+        if param.element_name == 'SNOW WATER EQUIVALENT':
             for row in param.data:
                 temp.append(row.value)
 
-    # Calculate the change in sd between days
+    # Calculate the change in SWE between days
     snow_diff = temp[1] - temp[0]
     print('[INFO] SD data reformatted, dSD=',snow_diff)
 
@@ -53,7 +53,7 @@ def job():
     print('[INFO] GIF selected')
     
     # Prep the tweet text
-    prec_diff_si = np.round((prec_diff*2.54), 2)
+    prec_diff_si = np.round((prec_diff*2.54), 1)
     tweet = f"It snowed {prec_diff_si} cm at Banner Summit on {dt.date.today()}."
     print('[INFO] Tweet written')
 
