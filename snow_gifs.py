@@ -12,8 +12,8 @@ from climata.snotel import StationDailyDataIO
 
 def job():
     # Authenticate to twitter
-    auth = tw.OAuthHandler('h9E4X7ol8CRJgmtfcHfv2uaop','H1pfhLiYHWGsEiLyZH1rM7J42FKv9FrNCj8WkMF7ItmUfXSShX')
-    auth.set_access_token('1338378145007734785-CGxTPHVlqPXMHUpWK2VmTC9bgvp1AJ', 'HQWqv99qCI8oWEcyR9EinnsycVnPkp3A2pYrJsWg2ib5n')
+    auth = tw.OAuthHandler('token','token')
+    auth.set_access_token('token', 'token')
 
     # Create API Object
     api = tw.API(auth)
