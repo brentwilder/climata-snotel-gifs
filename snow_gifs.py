@@ -25,18 +25,18 @@ def job():
                 end_date = dt.date.today())
     print('[INFO] Banner Summit data loaded for date:',dt.date.today())
     
-    # Looking through the nested loop and saving data (PRECIP)
+    # Looking through the nested loop and saving data (SD)
     temp = []
     for param in banner:
-        if param.element_name == 'PRECIPITATION ACCUMULATION':
+        if param.element_name == 'SNOW DEPTH':
             for row in param.data:
                 temp.append(row.value)
             
-    # Calculate the change in precip between days
+    # Calculate the change in precip (snowfall) between days
     prec_diff = temp[1] - temp[0]
     print('[INFO] Precip data reformatted, dPrecip=',prec_diff)
 
-    # Looking through the nested loop and saving data (SD)
+    # Looking through the nested loop and saving data (SWE)
     temp = []
     for param in banner:
         if param.element_name == 'SNOW WATER EQUIVALENT':
@@ -53,14 +53,14 @@ def job():
     print('[INFO] GIF selected')
     
     # Prep the tweet text
-    prec_diff_si = np.round((prec_diff*2.54), 1)
+    prec_diff_si = np.round((prec_diff*2.54), 2)
     tweet = f"It snowed {prec_diff_si} cm at Banner Summit on {dt.date.today()}."
     print('[INFO] Tweet written')
 
-    # Check to make sure there was precip
-    if prec_diff >= 0.5:
-        # Make sure this precip was snow
-        if snow_diff >= 0.1:
+    # Check to make sure there was snowfall
+    if prec_diff >= 0.2:
+        # Make sure the SWE also increased
+        if snow_diff >= 0.0001:
             # Create a tweet
             api.update_status(status=tweet, media_ids=[media.media_id])
             print('[INFO] Tweet posted!')
